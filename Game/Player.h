@@ -2,7 +2,6 @@
 #define _PLAYER_H
 
 #include <allegro5/allegro.h>
-#include <allegro5/allegro_image.h>  // Allegro 5 image add-on for loading bitmaps
 #include <string>
 
 class Player {

@@ -3,7 +3,6 @@
 #include <cmath>
 #include <iostream>
 #include <allegro5/allegro.h>
-#include <allegro5/allegro_image.h> // Add-on for image loading
 
 Player::Player() {
     // Create an empty bitmap for the player sprite

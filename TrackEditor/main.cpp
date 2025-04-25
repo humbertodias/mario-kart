@@ -1,3 +1,4 @@
+#define ALLEGRO_MAIN
 #include "AllegroKeyboard.h"
 #include "AllegroSystem.h"
 #include "TrackEditor.h"
@@ -5,10 +6,10 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_font.h>
-#include <iostream>
 #include <allegro5/allegro_ttf.h>
+#include <iostream>
 
-int main() {
+int main(int argc, char **argv) {
   // Initialize Allegro 5
   if (!al_init()) {
     std::cerr << "Failed to initialize Allegro 5!" << std::endl;

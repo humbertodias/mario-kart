@@ -1,6 +1,6 @@
 CC		= g++
 CFLAGS	= -Wall -pipe -g -W -O2 
-LDFLAGS	= $(shell pkg-config --libs allegro-5 allegro_font-5 allegro_ttf-5 allegro_image-5 allegro_primitives-5)
+LDFLAGS	= $(shell pkg-config --libs allegro-5 allegro_font-5 allegro_ttf-5 allegro_image-5 allegro_primitives-5 allegro_main-5)
 SOURCES	= \
 	../Common/AllegroSystem.cpp		\
 	../Common/AllegroScreen.cpp		\
@@ -9,13 +9,12 @@ SOURCES	= \
 	../Common/ObjectSize.cpp		\
 	../Common/Track.cpp				\
 	../Game/Camera.cpp			    \
-	main.cpp						\
-	TrackEditor.h
+	TrackEditor.cpp
 
 EXECUTABLE	= editor
 
-all: 
-	$(CC) TrackEditor.cpp -o $(EXECUTABLE) $(CFLAGS) -I../Common/ -I../Game $(SOURCES) $(LDFLAGS)
+all:
+	$(CC) main.cpp -o $(EXECUTABLE) $(CFLAGS) -I. -I../Game -I../Common $(SOURCES) $(LDFLAGS)
 
 clean:
 	rm -f *.o

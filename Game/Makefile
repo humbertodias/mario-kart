@@ -1,6 +1,6 @@
 CC		= g++
 CFLAGS	= -c -Wall -pipe -g -W -O2
-LDFLAGS	= $(shell pkg-config --libs allegro-5 allegro_font-5 allegro_ttf-5 allegro_image-5)
+LDFLAGS	= $(shell pkg-config --libs allegro-5 allegro_font-5 allegro_ttf-5 allegro_image-5 allegro_main-5)
 
 SOURCES	= \
 	../Common/AllegroSystem.cpp		\

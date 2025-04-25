@@ -1,7 +1,7 @@
 *.o
 
 Game/game
-TrackEditor/editor
+TrackEditor/editor*
 
 .vscode
 .idea

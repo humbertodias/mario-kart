@@ -1,7 +1,6 @@
 #include "Camera.h"
 #include "Player.h"
 #include <cmath>
-#include <iostream>
 
 Camera::Camera() {
   mMode7Params.spaceZ = 10;
