@@ -9,12 +9,12 @@ SOURCES	= \
 	../Common/SuperMode7.cpp		\
 	../Common/ObjectSize.cpp		\
 	../Common/Vector.cpp			\
-	Camera.cpp						\
 	../Common/Track.cpp				\
-	main.cpp 						\
+	Camera.cpp						\
 	Game.cpp						\
 	Opponent.cpp					\
-	Player.cpp
+	Player.cpp						\
+	main.cpp						\
 
 OBJECTS		= $(SOURCES:.cpp=.o)
 EXECUTABLE	= game
