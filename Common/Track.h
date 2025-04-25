@@ -1,7 +1,7 @@
 #ifndef _TRACK_H
 #define _TRACK_H
 
-#include <allegro.h>
+#include <allegro5/allegro.h>
 
 struct TrackInfo {
   double startCameraX;
@@ -12,14 +12,14 @@ struct TrackInfo {
 class Track {
 private:
   int mNumber;
-  BITMAP *mBitmap;
+  ALLEGRO_BITMAP *mBitmap;
 
 public:
   Track(int number);
 
   const TrackInfo info();
 
-  inline BITMAP *bitmap() const { return mBitmap; }
+  inline ALLEGRO_BITMAP *bitmap() const { return mBitmap; }
 };
 
 #endif

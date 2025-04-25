@@ -1,18 +1,20 @@
-#ifndef _ALLEGROKEYBOARD_H
-#define _ALLEGROKEYBOARD_H
+#ifndef ALLEGRO_KEYBOARD_H
+#define ALLEGRO_KEYBOARD_H
 
-class AllegroSystem;
+#include <allegro5/allegro.h>
+#include <unordered_map>
 
 class AllegroKeyboard {
-private:
-  friend class AllegroSystem;
-
+public:
   AllegroKeyboard();
+  ~AllegroKeyboard();
 
   void update();
+  bool isKeyDown(int keycode) const;
 
-public:
-  bool isKeyDown(int keyValue) const;
+private:
+  ALLEGRO_EVENT_QUEUE* queue = nullptr;
+  std::unordered_map<int, bool> keys;
 };
 
 #endif

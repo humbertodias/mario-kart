@@ -1,46 +1,43 @@
-#ifndef _ALLEGROSYSTEM_H
-#define _ALLEGROSYSTEM_H
+#ifndef ALLEGRO_SYSTEM_H
+#define ALLEGRO_SYSTEM_H
 
-#include "ColorDepth.h"
 #include "ObjectSize.h"
+#include "ColorDepth.h"
 
 class AllegroScreen;
 class AllegroKeyboard;
 
+#include <allegro5/allegro.h>
+
 class AllegroSystem {
-private:
-  AllegroScreen *mScreen;
-  AllegroKeyboard *mKeyboard;
-
 public:
-  static AllegroSystem *mInstance;
+  static AllegroSystem* Instance();
+  ~AllegroSystem();
 
-private:
-  AllegroSystem();
+  bool setupScreen(const ObjectSize& size, bool fullScreen, ColorDepth colorDepth);
+  AllegroKeyboard* installKeyboard();
+  void initializeTimers();
+  void pollEvents();
+  void waitForTicks();
 
-public:
+  inline AllegroScreen *screen() const { return mScreen; }
+
   static volatile long SpeedCounter;
   static volatile long TimeTicks;
   static volatile int Fps;
   static volatile int AvgFps;
   static volatile int LastFps;
 
-public:
-  ~AllegroSystem();
+private:
+  AllegroSystem();
+  static AllegroSystem* mInstance;
 
-  static AllegroSystem *Instance();
+  AllegroScreen* mScreen = nullptr;
+  AllegroKeyboard* mKeyboard = nullptr;
 
-  bool setupScreen(const ObjectSize &size, bool fullScreen = false,
-                   ColorDepth colorDepth = DepthAuto);
-  AllegroKeyboard *installKeyboard();
-  void initializeTimers();
-  void pollEvents(); // WARNING: Isso é realmente necessário?
-  void waitForTicks();
-
-  inline AllegroScreen *screen() const { return mScreen; }
-
-  static void IncrementSpeedCounter();
-  static void TimeTicker();
+  ALLEGRO_EVENT_QUEUE* eventQueue = nullptr;
+  ALLEGRO_TIMER* timer = nullptr;
+  double lastTime;
 };
 
 #endif

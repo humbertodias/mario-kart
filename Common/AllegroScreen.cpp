@@ -1,23 +1,38 @@
 #include "AllegroScreen.h"
 
-#include <allegro.h>
-#include <iostream>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>
+#include <stdexcept>
 #include <string>
 
-AllegroScreen::AllegroScreen(const ObjectSize &size, bool fullScreen,
-                             ColorDepth colorDepth) {
+AllegroScreen::AllegroScreen(const ObjectSize &size, bool fullScreen, ColorDepth colorDepth) {
+  if (!al_init()) {
+    throw std::runtime_error("Failed to initialize Allegro");
+  }
+
+  if (!al_init_image_addon()) {
+    throw std::runtime_error("Failed to initialize Allegro image addon");
+  }
+
+  // Set color depth if specified (Allegro 5 uses 32-bit color by default)
   int bpp = colorDepth;
+  if (colorDepth == DepthAuto) {
+    bpp = 32; // Default fallback
+  }
+  al_set_new_display_option(ALLEGRO_COLOR_SIZE, bpp, ALLEGRO_SUGGEST);
 
-  if (colorDepth == DepthAuto)
-    if ((bpp = desktop_color_depth()) == 0)
-      bpp = 16;
+  // Set display flags (fullscreen or windowed)
+  al_set_new_display_flags(fullScreen ? ALLEGRO_FULLSCREEN_WINDOW : ALLEGRO_WINDOWED);
 
-  set_color_depth(bpp);
+  // Create the display
+  mDisplay = al_create_display(size.width(), size.height());
+  if (!mDisplay) {
+    throw std::runtime_error("Failed to create display");
+  }
 
-  if (set_gfx_mode(
-          (fullScreen ? GFX_AUTODETECT_FULLSCREEN : GFX_AUTODETECT_WINDOWED),
-          size.width(), size.height(), 0, 0))
-    throw std::string("Não foi possível definir a profundidade de cor");
-
-  mBitmap = create_bitmap(SCREEN_W, SCREEN_H);
+  // Create an offscreen bitmap (optional, depends on your rendering logic)
+  mBitmap = al_create_bitmap(size.width(), size.height());
+  if (!mBitmap) {
+    throw std::runtime_error("Failed to create auxiliary bitmap");
+  }
 }

@@ -2,16 +2,15 @@
 #define _OPPONENT_H
 
 #include <string>
-
-#include <allegro.h>
+#include <allegro5/allegro.h>  // Include the Allegro 5 header
 
 class Opponent {
 public:
   enum Character { Mario, Luigi, Peach };
 
 private:
-  BITMAP *mSprite;
-  BITMAP *mBitmap;
+  ALLEGRO_BITMAP *mSprite;   // Allegro 5 uses ALLEGRO_BITMAP instead of BITMAP
+  ALLEGRO_BITMAP *mBitmap;
 
   float mPositionX;
   float mPositionY;
@@ -28,7 +27,7 @@ public:
   inline float y() const { return mPositionY; }
   inline void setY(float positionY) { mPositionY = positionY; }
 
-  inline BITMAP *bitmap() const { return mBitmap; }
+  inline ALLEGRO_BITMAP *bitmap() const { return mBitmap; }  // Return ALLEGRO_BITMAP*
 
   void loadBitmap(const std::string &fileName);
 

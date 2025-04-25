@@ -1,5 +1,6 @@
 #ifndef _GAME_H
 #define _GAME_H
+#include <allegro5/allegro_font.h>
 
 class Track;
 class Camera;
@@ -15,6 +16,7 @@ private:
   Player *mPlayer;
 
   Opponent *mOpponents[2];
+  ALLEGRO_FONT *font;
 
 public:
   Game();

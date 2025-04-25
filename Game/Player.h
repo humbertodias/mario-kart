@@ -1,15 +1,16 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
 
-#include <allegro.h>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>  // Allegro 5 image add-on for loading bitmaps
 #include <string>
 
 class Player {
 private:
   std::string mName;
 
-  BITMAP *mSprite;
-  BITMAP *mBitmap;
+  ALLEGRO_BITMAP *mSprite;
+  ALLEGRO_BITMAP *mBitmap;
 
   float mPositionX;
   float mPositionY;
@@ -21,7 +22,7 @@ private:
 public:
   Player();
 
-  void processInputEvents();
+  void processInputEvents(ALLEGRO_KEYBOARD_STATE * key_state);
   void update();
   void updateBmp(int step);
 
@@ -33,7 +34,8 @@ public:
 
   inline float angle() const { return mAngle; }
 
-  inline BITMAP *bitmap() const { return mBitmap; }
+  inline ALLEGRO_BITMAP *bitmap() const { return mBitmap; }
+
 };
 
 #endif

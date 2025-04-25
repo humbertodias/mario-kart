@@ -1,25 +1,18 @@
-#ifndef _ALLEGROSCREEN_H
-#define _ALLEGROSCREEN_H
+#ifndef ALLEGRO_SCREEN_H
+#define ALLEGRO_SCREEN_H
 
-#include "ColorDepth.h"
-#include "ObjectSize.h"
-
-#include <allegro.h>
-
-class AllegroSystem;
+#include "ObjectSize.h"  // You should define this
+#include "ColorDepth.h"  // Enum like: DepthAuto, 16, 24, 32...
+#include <allegro5/allegro.h>
 
 class AllegroScreen {
-private:
-  friend class AllegroSystem;
-
-  BITMAP *mBitmap;
-
-private:
-  AllegroScreen(const ObjectSize &size, bool fullScreen = false,
-                ColorDepth colorDepth = DepthAuto);
-
 public:
-  inline BITMAP *bitmap() const { return mBitmap; }
+  AllegroScreen(const ObjectSize &size, bool fullScreen, ColorDepth colorDepth);
+  inline ALLEGRO_BITMAP *bitmap() const { return mBitmap; }
+
+private:
+  ALLEGRO_DISPLAY *mDisplay = nullptr;
+  ALLEGRO_BITMAP *mBitmap = nullptr;
 };
 
 #endif
